@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queue. | Assignment Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <section id="intro-screen" class="screen">
+        <div class="intro-content">
+            <h1 class="glitch-title" data-text="Queue.">Queue.</h1>
+            <p class="vision-statement">
+                Crisp coordination. Zero missed targets. Absolute focus.
+            </p>
+            <button id="enter-btn" class="spider-btn">Enter Dimension <span>→</span></button>
+        </div>
+    </section>
+
+    <section id="tracker-screen" class="screen hidden-dimension">
+        <button id="back-btn" class="back-btn">← Go Back</button>
+        
+        <div class="tracker-container">
+            <h2 class="section-title">Drop a Deadline</h2>
+            
+            <form id="deadline-form">
+                <div class="input-group stagger-item">
+                    <label for="assignment-name">Assignment Name</label>
+                    <input type="text" id="assignment-name" placeholder="e.g., Physics Seminar" required>
+                </div>
+                
+                <div class="input-group stagger-item">
+                    <label for="due-date">Due Date</label>
+                    <input type="date" id="due-date" required>
+                </div>
+
+                <div class="input-group stagger-item">
+                    <label for="category">Category</label>
+                    <select id="category" required>
+                        <option value="Theory">📚 Theory</option>
+                        <option value="Lab">🧪 Lab</option>
+                        <option value="Project">🚀 Project</option>
+                        <option value="Personal">💡 Personal</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="submit-btn stagger-item">Lock It In</button>
+            </form>
+
+            <h2 class="section-title">Active Dimensions</h2>
+            <ul id="deadline-list">
+                </ul>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

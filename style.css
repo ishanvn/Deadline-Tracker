@@ -1,0 +1,317 @@
+/* ==========================================
+   1. MULTIVERSE CANVAS (LOCK SCROLLING)
+   ========================================== */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden; 
+    background-color: #0d0d11;
+    color: #ffffff;
+    font-family: 'Impact', 'Arial Black', sans-serif;
+}
+
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+#intro-screen {
+    z-index: 2;
+    background: radial-gradient(circle, #1a0b2e 0%, #0d0d11 100%);
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.85s cubic-bezier(0.175, 0.885, 0.32, 1.1), opacity 0.45s ease-in-out;
+}
+
+#tracker-screen {
+    z-index: 1;
+    background-color: #0b0b0e;
+    overflow-y: auto;
+    justify-content: flex-start;
+    padding: 60px 20px;
+    transition: transform 0.9s cubic-bezier(0.25, 1.4, 0.5, 1.15), opacity 0.6s ease-in-out;
+}
+
+/* ==========================================
+   2. ANIME-STYLE DIMENSIONAL TRANSLATIONS
+   ========================================== */
+.warp-out {
+    transform: scale(2.5) rotate(5deg);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.hidden-dimension {
+    transform: scale(0.6) rotate(-5deg);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ==========================================
+   3. INTRO ELEMENTS & SUBTLE GLITCH
+   ========================================== */
+.glitch-title {
+    font-size: 5rem;
+    letter-spacing: 4px;
+    color: #fff;
+    position: relative;
+    text-shadow: 3px 3px 0px #ff0055, -3px -3px 0px #00f0ff;
+    margin-top: 0;
+    margin-bottom: 20px;
+    animation: spiderGlitch 4s infinite linear; 
+}
+
+@keyframes spiderGlitch {
+    0%, 90%, 94%, 98%, 100% { text-shadow: 3px 3px 0px #ff0055, -3px -3px 0px #00f0ff; transform: translate(0, 0) skewX(0deg); }
+    91% { text-shadow: -5px 2px 0px #ff0055, 3px -2px 0px #00f0ff; transform: translate(-4px, 2px) skewX(10deg); }
+    93% { text-shadow: 4px -3px 0px #ff0055, -4px 3px 0px #00f0ff; transform: translate(3px, -1px) skewX(-10deg); }
+    95% { text-shadow: -3px -3px 0px #ff0055, 3px 3px 0px #00f0ff; transform: translate(-2px, -3px) skewX(5deg); }
+    97% { text-shadow: 5px 4px 0px #ff0055, -3px -2px 0px #00f0ff; transform: translate(4px, 2px) skewX(-5deg); }
+}
+
+.vision-statement {
+    font-family: 'Segoe UI', sans-serif;
+    max-width: 600px;
+    font-size: 1.1rem;
+    color: #bfaaff;
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+.spider-btn {
+    font-family: 'Impact', sans-serif;
+    font-size: 1.5rem;
+    padding: 15px 40px;
+    background-color: #ff0055;
+    color: white;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 5px 5px 0px #00f0ff;
+    transition: 0.2s ease;
+}
+
+.spider-btn:hover { 
+    transform: translate(-3px, -3px); 
+    box-shadow: 8px 8px 0px #00f0ff; 
+}
+
+.spider-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #00f0ff;
+}
+
+/* ==========================================
+   4. TRACKER DASHBOARD LAYOUT
+   ========================================== */
+.tracker-container {
+    width: 90%;
+    max-width: 500px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.section-title {
+    font-family: 'Impact', sans-serif;
+    font-size: 2.2rem;
+    color: #00f0ff;
+    letter-spacing: 1px;
+    margin-top: 30px;
+    border-bottom: 2px solid #ff0055;
+    padding-bottom: 5px;
+}
+
+#deadline-form {
+    background: #141419;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #252530;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    font-size: 0.85rem;
+    color: #8b8b9f;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.input-group input, 
+.input-group select {
+    background: #1c1c24;
+    border: 1px solid #323242;
+    padding: 12px;
+    color: white;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: 0.3s;
+    appearance: none; /* Removes the ugly default browser arrow */
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #00f0ff;
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: #00f0ff;
+    color: #000;
+    border: none;
+    font-family: 'Impact', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.submit-btn:hover {
+    background: #ff0055;
+    color: #fff;
+}
+
+/* ==========================================
+   5. AESTHETIC DEADLINE CARDS & DELETES
+   ========================================== */
+#deadline-list {
+    list-style: none;
+    padding: 0;
+}
+
+#deadline-list li {
+    background: #141419;
+    border-left: 5px solid #ff0055;
+    margin-bottom: 12px;
+    padding: 15px 20px;
+    border-radius: 0 8px 8px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    animation: cardPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* The Glowing Category Badge */
+.tag-badge {
+    font-size: 0.75rem;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #0d0d11;
+    color: #00f0ff;
+    border: 1px solid #00f0ff;
+    margin-right: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 5px rgba(0, 240, 255, 0.3);
+}
+
+#deadline-list button {
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+#deadline-list button:hover {
+    transform: scale(1.3) rotate(90deg);
+}
+
+.back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: transparent;
+    border: 1px solid #323242;
+    color: #8b8b9f;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: 0.2s;
+    z-index: 10;
+}
+
+.back-btn:hover {
+    color: #fff;
+    border-color: #fff;
+}
+
+@keyframes cardPop {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* ==========================================
+   6. ANIME.JS STYLE STAGGER & FLASH EFFECTS
+   ========================================== */
+.warp-flash {
+    animation: portalFlash 0.4s ease-out forwards;
+}
+
+@keyframes portalFlash {
+    0% { filter: hue-rotate(0deg) saturate(1); background-color: #ff0055; }
+    30% { filter: hue-rotate(180deg) saturate(3); background-color: #00f0ff; transform: scale(1.05) skewX(5deg); }
+    60% { filter: hue-rotate(270deg) saturate(5); background-color: #9871ff; transform: scale(0.95) skewX(-5deg); }
+    100% { filter: hue-rotate(360deg) saturate(1); background-color: #0b0b0e; transform: scale(1) skewX(0deg); }
+}
+
+.stagger-item {
+    opacity: 0;
+    transform: translateY(40px) scale(0.85);
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
+}
+
+.stagger-item.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* ==========================================
+   7. DYNAMIC TOAST NOTIFICATIONS
+   ========================================== */
+#cal-toast {
+    position: fixed;
+    bottom: -50px; 
+    left: 50%;
+    transform: translateX(-50%);
+    background: #00f0ff; 
+    color: #000;
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: bold;
+    font-size: 0.95rem;
+    box-shadow: 0 5px 20px rgba(0, 240, 255, 0.4);
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 100;
+    pointer-events: none; 
+}
+
+#cal-toast.active {
+    bottom: 40px;
+    opacity: 1;
+}
